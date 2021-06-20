@@ -13,8 +13,28 @@ class MyTodoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TodoListPage(),
+      home: LoginPage(),
     );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+          ElevatedButton(
+              child: Text('ログイン'),
+              onPressed: () async {
+                await Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
+                  return TodoListPage();
+                }));
+              })
+        ])));
   }
 }
 
@@ -29,9 +49,17 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('リスト一覧'),
-      ),
+      appBar: AppBar(title: Text('リスト一覧'), actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () async {
+            await Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return LoginPage();
+            }));
+          },
+        ),
+      ]),
       body: ListView.builder(
           itemCount: todoList.length,
           itemBuilder: (context, index) {
