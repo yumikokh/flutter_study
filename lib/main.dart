@@ -119,7 +119,8 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('リスト一覧'), actions: <Widget>[
+      appBar:
+          AppBar(title: Text(widget.user.email.toString()), actions: <Widget>[
         IconButton(
           icon: Icon(Icons.logout),
           onPressed: () async {
